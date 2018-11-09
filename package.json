@@ -1,0 +1,27 @@
+{
+  "name": "soundproject",
+  "version": "1.0.0",
+  "description": "get streem from soundcloud and publish",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazak/RadioProject.git"
+  },
+  "keywords": [
+    "radio",
+    "sound",
+    "streem"
+  ],
+  "author": "DSolo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kazak/RadioProject/issues"
+  },
+  "homepage": "https://github.com/kazak/RadioProject#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
