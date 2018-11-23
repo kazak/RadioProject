@@ -4,37 +4,35 @@ const router        = require('express').Router();
 const fs            = require('fs');
 const path          = require('path');
 const cookie_auth   = require('../modules/auth_cookies');
+const headMenu      = require('../menu/headMenu');
 
-function getDownloadFiles() {
+let getDownloadFiles = () => {
     return new Promise( (resolve, reject) => {
         fs.readdir(path.join(__dirname, '..', 'public', 'images'), (err, files) => {
 
             resolve(files);
         });
     });
-}
+};
 
 /* GET home page. */
 router.get('/', cookie_auth.checkoAuth, (req, res) => {
-    let link_auth = req.signedCookies.auth ? {
-        url: '/user',
-        title: 'profile'
-    } : {
-        url: '/login',
-        title: 'Login'
-    };
-
     res.render('index', {
         title: 'Home',
         form: false,
-        links: [
-            {
-                url: '/download',
-                title: 'Download'
-            },
-            link_auth
-        ]
+        menu: headMenu('home', req.signedCookies.auth)
     });
+});
+
+/* GET download page */
+router.get('/music', (req, res) => {
+
+    res.render('index', {
+        title: 'Music',
+        form: false,
+        menu: headMenu('music', req.signedCookies.auth)
+    });
+
 });
 
 /* GET download page */
@@ -72,12 +70,7 @@ router.post('/auth', cookie_auth.setAuth, (req, res, next) => {
 router.get('/login', cookie_auth.checkoAuth, (req, res, next) => {
     res.render('index', {
         title: 'Login',
-        links: [
-            {
-                url: '/',
-                title: 'Home'
-            },
-        ],
+        menu: headMenu('login', req.signedCookies.auth),
         form: {
             action: '/auth',
             method: 'POST',
@@ -108,12 +101,7 @@ router.get('/user', (req, res, next) => {
     if (req.signedCookies.auth) {
         res.render('user', {
             title: `Page of ${req.signedCookies.auth}`,
-            links: [
-                {
-                    url: '/',
-                    title: 'Home'
-                },
-            ]
+            menu: headMenu('user', req.signedCookies.auth)
         });
     } else {
         res.redirect('/login');

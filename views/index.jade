@@ -4,7 +4,7 @@ block content
     h1= title
     p Welcome to #{title}
     ul
-    each link in links
+    each link in menu
         li
             a(href=link.url) #{link.title}
     if form
