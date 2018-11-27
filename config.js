@@ -3,7 +3,7 @@
 const path      = require('path');
 const config    = {
     views_path:     path.join(__dirname, 'views'),
-    view_engine:    'jade',
+    view_engine:    'nunjucks',
     favicon_path:   path.join(__dirname, 'public', 'images', 'icons', 'favicon.ico'),
     default_port:   '3000',
     cookies: {

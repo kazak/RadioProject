@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>{{title}}</h1>
+    <p> Welcome to {{title}}</p>
+    <ul>
+    {% for link in menu %}
+        <li>
+            <a href={{link.url}}> #{{link.title}} </a>
+        </li>
+    {% endfor %}
+    {% if form %}
+        <form action='{{form.action}}' method='{{form.method}}'>
+            {% for inputs in form.inputs %}
+                <p>
+                    <div> {{inputs.title}} </div>
+                    <input type='{{inputs.type}}' placeholder='{{inputs.placeholder}}' name='{{inputs.name}}'>
+                </p>
+            {% endfor %}
+        </form>
+    {% endif %}
+{% endblock %}

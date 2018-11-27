@@ -6,8 +6,11 @@ const favicon       = require('express-favicon');
 const cookie        = require('cookie-parser');
 const config        = require('./config');
 const bodyParser    = require('body-parser');
-
+const expNunjucks   = require('express-nunjucks');
 const app           = express();
+
+const isDev = app.get('env') === 'development';
+
 
 /**
  * Config express
@@ -15,7 +18,13 @@ const app           = express();
 
 // Set view
 app.set('views', config.views_path);
-app.set('view engine', config.view_engine);
+
+expNunjucks(app, {
+    watch: isDev,
+    noCache: isDev
+});
+
+// app.set('view engine', config.view_engine);
 
 // Set static folder
 app.use('/public', express.static(config.public_dir));
